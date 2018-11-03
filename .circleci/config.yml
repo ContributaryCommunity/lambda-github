@@ -10,24 +10,24 @@ jobs:
       - checkout
 
       # Download and cache dependencies
-      # - restore_cache:
-      #     keys:
-      #     - v1-dependencies-{{ checksum "package.json" }}
-      #     # fallback to using the latest cache if no exact match is found
-      #     - v1-dependencies-
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - v1-dependencies-
 
-      # - run:
-      #     name: Install Project Dependencies
-      #     command: yarn install
+      - run:
+          name: Install Project Dependencies
+          command: yarn install
 
-      # - run:
-      #     name: Run Linter
-      #     command: yarn lint
+      - run:
+          name: Run Linter
+          command: yarn lint
       
-      # - run:
-      #     name: Run Ingest Script
-      #     command: mkdir tmp && yarn ingest
+      - run:
+          name: Run Ingest Script
+          command: mkdir tmp && yarn function:issues
 
-      # - run:
-      #     name: Run Read Script
-      #     command: rm -rf tmp/* && yarn read
+      - run:
+          name: Run Read Script
+          command: yarn function:repositories

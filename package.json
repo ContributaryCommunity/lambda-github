@@ -1,0 +1,17 @@
+{
+  "name": "lambda-github",
+  "version": "0.1.0",
+  "description": "Lambda for (reverse) proxying GitHub API requests from the frontend",
+  "main": "src/index.js",
+  "repository": "git@github.com:ContributaryCommunity/lambda-github.git",
+  "author": "Owen Buckley <owen@thegreenhouse.io>",
+  "license": "MIT",
+  "scripts": {
+    "function:issues": "node ./src/issues.js",
+    "function:repositories": "node ./src/repositories.js",
+    "lint": "eslint src/*.js"
+  },
+  "devDependencies": {
+    "eslint": "^5.8.0"
+  }
+}
