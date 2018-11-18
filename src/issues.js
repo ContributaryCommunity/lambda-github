@@ -23,7 +23,7 @@ if (!isProduction) {
   const mockEvent = {
     queryStringParameters: {
       projectName: 'contributarycommunity',
-      repoName: 'www.contributary.community' 
+      repoName: 'www.contributary.community'
     }
   };
 
@@ -37,7 +37,7 @@ function writeToFilesystem(response) {
     if (err) {
       return console.error(err); // eslint-disable-line no-console
     }
-    
+
     console.log(`File ${filePath} was saved!`); // eslint-disable-line no-console
   });
 }
@@ -61,11 +61,12 @@ function handleIssuesResponse(response) {
 
 // https://developer.github.com/v3/issues/
 // application/vnd.github.symmetra-preview+json
-function getIssues(projectName, repositoryName) {
+function getIssues(projectName, repositoryName, labelFilter) {
   const midFix = `${projectName}/${repositoryName}`;
+  const labelFix = labelFilter ? `?labels=${labelFilter}` : '';
   const options = {
     host,
-    path: `/repos/${midFix}/issues`,
+    path: `/repos/${midFix}/issues${labelFix}`,
     headers
   };
 
@@ -91,9 +92,9 @@ function getIssues(projectName, repositoryName) {
 }
 
 function run(event = {}) {
-  const { projectName, repoName } = event.queryStringParameters;
+  const { projectName, repoName, labelFilter } = event.queryStringParameters;
 
-  return getIssues(projectName, repoName)
+  return getIssues(projectName, repoName, labelFilter)
     .then(handleIssuesResponse)
     .catch((error) => {
       console.error(error); // eslint-disable-line no-console
