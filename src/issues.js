@@ -23,7 +23,8 @@ if (!isProduction) {
   const mockEvent = {
     queryStringParameters: {
       projectName: 'contributarycommunity',
-      repoName: 'www.contributary.community'
+      repoName: 'www.contributary.community',
+      labelFilter: 'good+first+issue'
     }
   };
 
